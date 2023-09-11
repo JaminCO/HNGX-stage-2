@@ -16,13 +16,13 @@ Before you begin, ensure you have the following installed:
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/JaminCO/HNGx.git
+   git clone https://github.com/JaminCO/HNGX-stage-2.git
    ```
 
 2. Change to the project directory:
 
    ```bash
-   cd Hngx
+   cd Hngx-stage-2
    ```
 
 3. Create a virtual environment (optional but recommended):
