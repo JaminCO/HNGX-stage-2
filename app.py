@@ -1,6 +1,8 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 
+import datetime
+from datetime import timezone
 
 app = Flask(__name__)
 app.app_context().push()
@@ -15,6 +17,24 @@ class User(db.Model):
 
     def __repr__(self):
         return f'<User {self.name}>'
+
+
+@app.route('/api',methods=['GET',])
+def home():
+    args = request.args
+    slack_name = args.get("slack_name")
+    track = args.get("track")
+    current_day = datetime.date.today().strftime("%A")
+    response = {
+        "slack_name": slack_name,
+        "current_day": current_day,
+        "utc_time": datetime.datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "track": track,
+        "github_file_url": "https://github.com/JaminCO/HNGx/blob/main/Stage-1/app.py",
+        "github_repo_url": "https://github.com/JaminCO/HNGx",
+        "status_code": 200
+    }
+    return jsonify(response)
 
 
 @app.route('/api',methods=["POST"])
