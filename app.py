@@ -47,7 +47,7 @@ def crud():
             usr = User(name=name)
             db.session.add(usr)
             db.session.commit()
-            return jsonify({"success":True, "message":"User created", "id":usr.id}), 201
+            return jsonify({"success":True, "message":"User created", "id":usr.id, "name":name}), 201
         else:
             return jsonify({"success":False, "message":"Bad request missing 'name' attribute"}), 400
 
@@ -75,7 +75,7 @@ def rud(id):
                 name = request_data["name"]
                 usr.name = name
                 db.session.commit()
-                return jsonify({"success":True, "message":"User updated", "id":usr.id}), 200
+                return jsonify({"success":True, "message":"User updated", "id":usr.id, "name":name}), 200
         else:
             return jsonify({"success":False, "message":"Bad request missing 'name' attribute"}), 400
 
@@ -88,7 +88,7 @@ def rud(id):
         else:
             db.session.delete(usr)
             db.session.commit()
-        return jsonify({"success":True}), 200
+        return jsonify({"success":True, "message":"User deleted"}), 200
 
     return jsonify({"success": False, "message":"Method not allowed"}), 405
 

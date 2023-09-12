@@ -1,4 +1,8 @@
 import requests
+import random
+
+names = ["John", "Jane Doe", "John Doe Junior"]
+
 
 # Define the base URL of your API
 base_url = "https://bookish.pythonanywhere.com"
@@ -17,6 +21,7 @@ def create_book(name):
     print("POST Request:")
     print(response.status_code)
     print(response.json())
+    return response.json()["id"]
 
 # Function to perform PUT request (Update)
 def update_book(user_id, name):
@@ -37,14 +42,16 @@ def delete_book(user_id):
 
 # Test your API
 if __name__ == "__main__":
-    # Test POST request
-    create_book("John Doe")
+    for name in names:
+        # Test POST request
+        id = create_book(name)
+        # Test GET request
+        get_books(id)
 
-    # Test GET request
-    get_books(1)
+        # Test PUT request
+        update_book(id, name)
 
-    # Test PUT request
-    update_book(1, "Jane Smith")
-
-    # Test DELETE request
-    delete_book(1)
+        # Test DELETE request
+        delete_book(id)
+        print("\n---------------------------------------\n")
+    print("\nALL TEST DONE")
